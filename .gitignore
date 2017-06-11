@@ -1,0 +1,12 @@
+.idea
+.idea/
+**/.idea/
+__pycache__
+__pycache__/
+**/pycache__/
+tools/**/bin
+tools/**/obj
+tools/**/packages
+.vs
+.vs/
+**/.vs/

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.math {
+    position: relative;
+}
+.math div {
+    position: absolute;
+}
+.math .leftbrace1 {
+    border-left: 0.1ex solid;
+    border-top: 0.1ex solid;
+    border-top-left-radius: 0.5em 1ex;
+    width: 0.25em;
+}
+.math .leftbrace2 {
+    border-right: 0.1ex solid;
+    border-bottom: 0.1ex solid;
+    border-bottom-right-radius: 0.5em 1ex;
+    width: 0.25em;
+}
+.math .leftbrace3 {
+    border-right: 0.1ex solid;
+    border-top: 0.1ex solid;
+    border-top-right-radius: 0.5em 1ex;
+    width: 0.25em;
+}
+.math .leftbrace4 {
+    border-left: 0.1ex solid;
+    border-bottom: 0.1ex solid;
+    border-bottom-left-radius: 0.5em 1ex;
+    width: 0.25em;
+}
+.math .slash1 {
+    width: 0;
+    height: 0;
+    border-bottom: 2ex solid transparent;
+    border-left: 0.5em solid black;
+}
+.math .slash2 {
+    width: 0;
+    height: 0;
+    border-bottom: 2ex solid transparent;
+    border-left: 0.5em solid white;
+}
+</style>
+</head>
+<body>
+<div class="math" style="width:6em;height:12ex;">
+<div style="left:2.05em;top:3ex;" class="slash1"></div>
+<div style="left:2em;top:3ex;" class="slash2"></div>
+
+<div style="left:1.25em;top:0.5ex;height:1ex;" class="leftbrace1"></div>
+<div style="left:1em;top:1.5ex;height:1ex;" class="leftbrace2"></div>
+<div style="left:1em;top:2.5ex;height:1ex;" class="leftbrace3"></div>
+<div style="left:1.25em;top:3.5ex;height:1ex;" class="leftbrace4"></div>
+
+<div style="left:2em;top:2ex;">{x}</div>
+
+<div style="left:4.25em;top:0.5ex;height:2ex;" class="leftbrace3"></div>
+<div style="left:4.5em;top:2.5ex;height:2ex;" class="leftbrace4"></div>
+<div style="left:4.5em;top:4.5ex;height:2ex;" class="leftbrace1"></div>
+<div style="left:4.25em;top:6.5ex;height:2ex;" class="leftbrace2"></div>
+</div>
+</body>
+</html>
