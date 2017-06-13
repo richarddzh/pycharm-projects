@@ -10,6 +10,7 @@ class Glyph:
 
 GLYPHS = {}
 
+
 class FontMetrics:
     def __init__(self):
         self.glyphCount = 0
@@ -23,9 +24,9 @@ class FontMetrics:
         if char is not None and len(char) > 0:
             c = char[0]
             code = ord(c)
-            if code in GLYPHS:
-                return GLYPHS[code]
-        return GLYPHS[77]  # char 'M'
+            if code in self.glyphs:
+                return self.glyphs[code]
+        return self.glyphs[77]  # char 'M'
 
 
 FONT_METRICS = FontMetrics()

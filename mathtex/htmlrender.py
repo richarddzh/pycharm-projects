@@ -3,6 +3,7 @@ from mathtex.fontmetric import FONT_METRICS
 from mathtex.util import Array2D
 from typing import List
 
+
 class RowColumnMeta:
     def __init__(self):
         self.x = 0
@@ -23,7 +24,26 @@ class HtmlElement:
         self.font_size = 1  # font-size relative to 1em
         self.css_class = None
         self.text = None
-        self.children = []
+        self.children = []  # type: List[HtmlElement]
+
+    def to_html(self, offset_x=0, offset_y=0) -> str:
+        if len(self.children) > 0:
+            lines = []
+            for child in self.children:
+                line = child.to_html(self.x + offset_x, self.y + offset_y)
+                if len(line) > 0:
+                    lines.append(line)
+            return '\n'.join(lines)
+        if self.text is None and self.css_class is None:
+            return ""
+        html_text = "" if self.text is None else self.text
+        html_pos = "left:{0}em;top:{1}em;".format(self.x + offset_x, self.y + offset_y)
+        html_width = "" if self.width is None else "width:{0}em;".format(self.width)
+        html_height = "" if self.height is None else "height:{0}em;".format(self.height)
+        html_font_size = "" if self.font_size == 1 else "font-size:{0}em;".format(self.font_size)
+        html_class = "" if self.css_class is None else ' class="{0}"'.format(self.css_class)
+        return '<{0} style="{1}"{2}>{3}</{0}>'.format(
+            self.name, html_pos + html_width + html_height + html_font_size, html_class, html_text)
 
 
 class HtmlRender:
@@ -34,6 +54,10 @@ class HtmlRender:
         self.line_margin = 0
         self.line_height = FONT_METRICS.height
 
+    @staticmethod
+    def get_baseline(line_height, font_size):
+        return (line_height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
+
     def render(self, node: MathTexAST, font_size) -> HtmlElement:
         if node.node_type == MathTexAST.TEXT_NODE:
             return self.render_text(node.text, font_size)
@@ -41,12 +65,14 @@ class HtmlRender:
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.CELL_NODE:
             return self.render_block(node.children, font_size)
+        if node.node_type == MathTexAST.ENV_NODE:
+            return self.render_env(node.children, font_size)
 
     def render_text(self, text, font_size) -> HtmlElement:
         elem = HtmlElement()
         elem.width = 0
         elem.height = self.line_height * font_size
-        elem.baseline = ((self.line_height - FONT_METRICS.height) / 2 + FONT_METRICS.baseline) * font_size
+        elem.baseline = self.get_baseline(elem.height, font_size)
         elem.font_size = font_size
         for i in range(0, len(text)):
             if i > 0:
@@ -82,7 +108,11 @@ class HtmlRender:
             child.y = elem.baseline - child.baseline
         return elem
 
-    def render_env(self, lines, font_size):
+    def render_env(self, lines, font_size) -> HtmlElement:
+        env_elem = HtmlElement()
+        env_elem.width = 0
+        env_elem.height = 0
+        env_elem.baseline = 0
         a2d = Array2D()  # type: Array2D
         rows = []  # type: List[RowColumnMeta]
         columns = []  # type: List[RowColumnMeta]
@@ -94,8 +124,7 @@ class HtmlRender:
             for j in range(0, len(line.children)):
                 if j >= len(columns):
                     columns.append(RowColumnMeta())
-                cell = line.children[j]  # type: MathTexAST
-                elem = self.render_block(cell.children, font_size)
+                elem = self.render(line.children[j], font_size)
                 a2d.set(i, j, elem)
                 if elem.height >= rows[i].height:
                     rows[i].height = elem.height
@@ -103,6 +132,19 @@ class HtmlRender:
                     rows[i].baseline = elem.baseline
                 if elem.width >= columns[j].width:
                     columns[j].width = elem.width
-        for j in range(1, len(columns)):
-            columns[j].x = columns[j-1].x + columns[j-1].width + self.cell_margin * font_size
+            env_elem.height = rows[i].y + rows[i].height
+        for j in range(0, len(columns)):
+            if j > 0:
+                columns[j].x = columns[j-1].x + columns[j-1].width + self.cell_margin * font_size
+            env_elem.width = columns[j].x + columns[j].width
+        env_elem.baseline = self.get_baseline(env_elem.height, font_size)
+        for i in range(0, len(lines)):
+            line = lines[i]  # type: MathTexAST
+            for j in range(0, len(line.children)):
+                elem = a2d.get(i, j)  # type: HtmlElement
+                elem.x = columns[j].x
+                elem.y = rows[i].y + elem.baseline - rows[i].baseline
+                env_elem.children.append(elem)
+        return env_elem
+
 
