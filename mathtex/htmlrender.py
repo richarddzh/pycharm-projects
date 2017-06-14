@@ -75,9 +75,13 @@ class HtmlRender:
         elem.baseline = self.get_baseline(elem.height, font_size)
         elem.font_size = font_size
         for i in range(0, len(text)):
+            c = text[i]
             if i > 0:
                 elem.width += self.char_margin * font_size
-            c = text[i]
+                pre_c = text[i - 1]
+                bearing = min(FONT_METRICS.get_glyph(pre_c).right_bearing, FONT_METRICS.get_glyph(c).left_bearing)
+                if bearing > 0:
+                    elem.width -= bearing * font_size
             child = HtmlElement()
             child.x = elem.width
             child.y = 0
