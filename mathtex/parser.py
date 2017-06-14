@@ -1,6 +1,8 @@
 import re
 from mathtex.astree import MathTexAST
 from mathtex.util import last_index
+from mathtex.texcharset import TEX_CHARSET
+
 
 RE_CMD = re.compile(r"\\([A-Za-z]+|.)", re.DOTALL)
 RE_BEGIN_ENV = re.compile(r"\\begin\{([A-Za-z]+)\}")
@@ -108,7 +110,11 @@ class MathTexParser:
         elif cmd in TEX_CMD_ARG_NUMBER:
             self.push_command(cmd, TEX_CMD_ARG_NUMBER[cmd])
         else:
-            self.push_command(cmd, 0)
+            c = TEX_CHARSET.get_char(cmd)
+            if c is not None:
+                self.stack.append(MathTexAST.text_node(c))
+            else:
+                self.push_command(cmd, 0)
 
     def push_command(self, cmd, arg_number):
         self.stack.append(MathTexAST.command_node(cmd, arg_number))

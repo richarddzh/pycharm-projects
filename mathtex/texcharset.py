@@ -1,3 +1,6 @@
+from typing import Dict
+
+
 class TexChar:
     def __init__(self, cmd, char, unicode):
         self.command = cmd
@@ -7,13 +10,22 @@ class TexChar:
 
 class TexCharSet:
     def __init__(self):
-        self.charset = {}
+        self.charset = {}  # type: Dict[str, TexChar]
 
     def add(self, cmd, char, unicode):
         self.charset[cmd] = TexChar(cmd, char, unicode)
 
+    def get_char(self, cmd):
+        if cmd in self.charset:
+            return self.charset[cmd].char
+        return None
+
 
 TEX_CHARSET = TexCharSet()
+
+# Escape character
+TEX_CHARSET.add('{', '{', 123)
+TEX_CHARSET.add('}', '}', 125)
 
 # Greek small letter
 TEX_CHARSET.add('alpha', 'α', 945)
