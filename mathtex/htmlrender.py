@@ -58,15 +58,49 @@ class HtmlRender:
     def get_baseline(line_height, font_size):
         return (line_height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
 
+    @staticmethod
+    def make_left_right_pair(node: MathTexAST):
+        stack = []
+        new_children = []
+        for i in range(0, len(node.children)):
+            child = node.children[i]
+            if child.node_type != MathTexAST.CMD_NODE:
+                new_children.append(child)
+                continue
+            if child.command == "left" and len(child.children) > 0:
+                child.begin_index = len(new_children)
+                stack.append(child)
+            elif child.command == "right" and len(child.children) > 0 and len(stack) > 0:
+                left = stack.pop()  # type: MathTexAST
+                begin_index = left.begin_index
+                if begin_index >= len(new_children):
+                    new_children += left.children[0:1]
+                    new_children += child.children[0:1]
+                else:
+                    new_cmd = MathTexAST.command_node("left+right", 3)
+                    new_block = MathTexAST.block_node(new_children[begin_index:])
+                    new_cmd.children += left.children[0:1]
+                    new_cmd.children += child.children[0:1]
+                    new_cmd.children.append(new_block)
+                    new_children = new_children[0:begin_index]
+                    new_children.append(new_cmd)
+        node.children = new_children
+
     def render(self, node: MathTexAST, font_size) -> HtmlElement:
         if node.node_type == MathTexAST.TEXT_NODE:
             return self.render_text(node.text, font_size)
         if node.node_type == MathTexAST.BLOCK_NODE:
+            self.make_left_right_pair(node)
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.CELL_NODE:
+            self.make_left_right_pair(node)
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.ENV_NODE:
             return self.render_env(node.children, font_size)
+        elem = HtmlElement()
+        elem.width = 0
+        elem.height = 0
+        return elem
 
     def render_text(self, text, font_size) -> HtmlElement:
         elem = HtmlElement()

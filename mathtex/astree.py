@@ -1,3 +1,6 @@
+from typing import List
+
+
 class MathTexAST:
     BLOCK_NODE = 0
     LINE_NODE = 1
@@ -7,7 +10,7 @@ class MathTexAST:
     CMD_NODE = 5
 
     def __init__(self, node_type):
-        self.children = []
+        self.children = []  # type: List[MathTexAST]
         self.text = ""
         self.env_name = ""
         self.command = ""
