@@ -72,3 +72,9 @@ class MathTexAST:
             return "<Cmd {0}: {1}>".format(self.command, sub_nodes)
         else:
             return "<MathTexAST Unknown>"
+
+    def get_first_string(self) -> str:
+        if self.node_type == MathTexAST.TEXT_NODE or len(self.children) < 1:
+            return self.text
+        else:
+            return self.children[0].get_first_string()

@@ -46,6 +46,9 @@ class HtmlElement:
             self.name, html_pos + html_width + html_height + html_font_size, html_class, html_text)
 
 
+CMD_LEFT_RIGHT = "left+right"
+
+
 class HtmlRender:
     def __init__(self):
         self.html_elements = []
@@ -77,7 +80,7 @@ class HtmlRender:
                     new_children += left.children[0:1]
                     new_children += child.children[0:1]
                 else:
-                    new_cmd = MathTexAST.command_node("left+right", 3)
+                    new_cmd = MathTexAST.command_node(CMD_LEFT_RIGHT, 3)
                     new_block = MathTexAST.block_node(new_children[begin_index:])
                     new_cmd.children += left.children[0:1]
                     new_cmd.children += child.children[0:1]
@@ -97,6 +100,8 @@ class HtmlRender:
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.ENV_NODE:
             return self.render_env(node.children, font_size)
+        if node.node_type == MathTexAST.CMD_NODE:
+            return self.render_command(node.command, node.children, font_size)
         elem = HtmlElement()
         elem.width = 0
         elem.height = 0
@@ -125,7 +130,7 @@ class HtmlRender:
             elem.children.append(child)
         return elem
 
-    def render_block(self, children, font_size) -> HtmlElement:
+    def render_block(self, children: List[MathTexAST], font_size) -> HtmlElement:
         elem = HtmlElement()
         elem.width = 0
         elem.height = 0
@@ -146,7 +151,7 @@ class HtmlRender:
             child.y = elem.baseline - child.baseline
         return elem
 
-    def render_env(self, lines, font_size) -> HtmlElement:
+    def render_env(self, lines: List[MathTexAST], font_size) -> HtmlElement:
         env_elem = HtmlElement()
         env_elem.width = 0
         env_elem.height = 0
@@ -158,7 +163,7 @@ class HtmlRender:
             rows.append(RowColumnMeta())
             if i > 0:
                 rows[i].y = rows[i-1].y + rows[i-1].height + self.line_margin * font_size
-            line = lines[i]  # type: MathTexAST
+            line = lines[i]
             for j in range(0, len(line.children)):
                 if j >= len(columns):
                     columns.append(RowColumnMeta())
@@ -185,4 +190,19 @@ class HtmlRender:
                 env_elem.children.append(elem)
         return env_elem
 
+    def render_command(self, cmd, children: List[MathTexAST], font_size) -> HtmlElement:
+        if cmd == CMD_LEFT_RIGHT:
+            return self.render_cmd_left_right(children, font_size)
 
+    def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
+        middle_item = self.render(children[2], font_size)
+        brace_size = middle_item.height / FONT_METRICS.height
+        left = children[0].get_first_string()
+        right = children[1].get_first_string()
+        elem = HtmlElement()
+        elem.width = 0
+        elem.height = 0
+        elem.baseline = 0
+        if len(left) == 1 and left in "([{":
+            if brace_size < 2:
+                child = self.render_text(left, brace_size)
