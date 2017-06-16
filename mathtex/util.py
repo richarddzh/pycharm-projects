@@ -2,6 +2,7 @@ from typing import TypeVar
 from typing import Generic
 from typing import Optional
 from typing import List
+from typing import Callable
 
 
 def last_index(a_list, func):
@@ -12,6 +13,17 @@ def last_index(a_list, func):
 
 
 T = TypeVar('T')
+
+
+class Array1D(Generic[T]):
+    def __init__(self, size, ctor: Callable[[], T]):
+        self.size = size
+        self.items = []
+        for i in range(0, size):
+            self.items.append(ctor())
+
+    def __getitem__(self, item):
+        return self.items[item]
 
 
 class Array2D(Generic[T]):
@@ -37,3 +49,10 @@ class Array2D(Generic[T]):
         if x >= len(self.rows[y]):
             return None
         return self.rows[y][x]
+
+    def for_each_not_none(self, action: Callable[[int, int, T], None]):
+        for i in range(0, self.height):
+            for j in range(0, self.width):
+                item = self.get(i, j)
+                if item is not None:
+                    action(i, j, item)

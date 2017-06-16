@@ -25,7 +25,9 @@ class HtmlElement:
         if self.text is None and self.css_class is None:
             return ""
         html_text = "" if self.text is None else self.text
-        html_pos = "left:{0}em;top:{1}em;".format(self.x + offset_x, self.y + offset_y)
+        html_pos = "left:{0}em;top:{1}em;".format(
+            (self.x + offset_x) / self.font_size,
+            (self.y + offset_y) / self.font_size)
         html_width = "" if self.width is None else "width:{0}em;".format(self.width)
         html_height = "" if self.height is None else "height:{0}em;".format(self.height)
         html_font_size = "" if self.font_size == 1 else "font-size:{0}em;".format(self.font_size)

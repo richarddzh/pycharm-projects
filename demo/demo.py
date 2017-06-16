@@ -3,7 +3,7 @@ from mathtex.htmlrender import HtmlRender
 
 p = MathTexParser()
 p.begin_parse()
-p.parse_line(r"\begin{array}af\end{array}\alpha fa(g)+b01.23\begin{array}\left\{hM\right]q&b\\&D-c\end{array}")
+p.parse_line(r"\begin{array}af\end{array}\alpha fa(g)+b01.23\left(\begin{array}\left\{hM\right]q&b\\&D-c\\bla&bla\end{array}\right\}")
 result = p.end_parse()
 print(result)
 
