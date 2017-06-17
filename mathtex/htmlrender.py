@@ -119,9 +119,12 @@ class HtmlRender:
             return self.render_command(node.command, node.children, font_size)
         return HtmlElement(width=0, height=0)
 
-    def render_text(self, text, font_size) -> HtmlElement:
+    def render_text(self, text, font_size, middle_align_with=None) -> HtmlElement:
         elem = HtmlElement(width=0, height=self.line_height * font_size)
-        elem.baseline = self.get_baseline(elem.height, font_size)
+        if middle_align_with is not None:
+            elem.baseline = self.get_baseline(elem.height, middle_align_with)
+        else:
+            elem.baseline = self.get_baseline(elem.height, font_size)
         for i in range(0, len(text)):
             c = text[i]
             if i > 0:
@@ -165,9 +168,9 @@ class HtmlRender:
         right = children[1].get_first_string()
         elem = HtmlElement()
         if len(left) == 1 and left in "([{":
-            elem.children.append(self.render_text(left, brace_size))
+            elem.children.append(self.render_text(left, brace_size, font_size))
         elem.children.append(middle_item)
         if len(right) == 1 and right in ")]}":
-            elem.children.append(self.render_text(right, brace_size))
+            elem.children.append(self.render_text(right, brace_size, font_size))
         self.align_children(elem, font_size)
         return elem
