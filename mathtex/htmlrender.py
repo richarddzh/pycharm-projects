@@ -128,6 +128,8 @@ class HtmlRender:
     def render_command(self, cmd, children: List[MathTexAST], font_size) -> HtmlElement:
         if cmd == MathTexAST.CMD_LEFT_RIGHT:
             return self.render_cmd_left_right(children, font_size)
+        if cmd == MathTexAST.CMD_SUB_SUP:
+            return self.render_cmd_sub_sup(children, font_size)
 
     def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
         middle_item = self.render(children[2], font_size)
@@ -147,4 +149,34 @@ class HtmlRender:
             else:
                 elem.children.append(HtmlElement.create_brace(right, middle_item.height, font_size))
         self.align_children(elem, font_size)
+        return elem
+
+    def render_cmd_sub_sup(self, children: List[MathTexAST], font_size) -> HtmlElement:
+        elem = HtmlElement()
+        main_item = self.render(children[0], font_size)
+        elem.children.append(main_item)
+        elem.width = main_item.width
+        elem.height = main_item.height
+        elem.baseline = main_item.baseline
+        sub_size = (font_size + 0.25) / 2.5
+        if children[1] is not None:
+            sub_item = self.render(children[1], sub_size)
+            sub_item.x = main_item.width + sub_size * self.char_margin
+            elem.children.append(sub_item)
+            elem.width = sub_item.x + sub_item.width
+            if sub_item.height > main_item.height / 2:
+                main_item.y = sub_item.height - main_item.height / 2
+                elem.baseline += main_item.y
+                elem.height += main_item.y
+        if children[2] is not None:
+            sup_item = self.render(children[2], sub_size)
+            sup_item.x = main_item.width + sub_size * self.char_margin
+            elem.children.append(sup_item)
+            elem.width = max(elem.width, sup_item.x + sup_item.width)
+            delta = sup_item.height - main_item.height / 2
+            if delta <= 0:
+                sup_item.y = main_item.y + main_item.height / 2 - delta
+            else:
+                sup_item.y = main_item.y + main_item.height / 2
+                elem.height += delta
         return elem

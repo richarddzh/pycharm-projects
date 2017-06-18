@@ -1,67 +1,164 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
 <style>
+.math-inline {
+    display: inline-block;
+}
 .math {
     position: relative;
+    padding: 0;
+    margin: 0;
 }
 .math div {
     position: absolute;
+    padding: 0;
+    margin: 0;
+    /*font-family: "Lucida Sans Unicode";*/
 }
-.math .leftbrace1 {
-    border-left: 0.1ex solid;
+.math .hline {
+    border-top: 0.14ex solid;
+}
+.math .left-bracket, .math .left-bracket-rounded {
+    border-left: 0.14ex solid;
+    border-top: 0.1ex solid;
+    border-bottom: 0.1ex solid;
+    width: 0.25em;
+}
+.math .right-bracket, .math .right-bracket-rounded {
+    border-right: 0.14ex solid;
+    border-top: 0.1ex solid;
+    border-bottom: 0.1ex solid;
+    width: 0.25em;
+}
+.math .left-bracket-rounded {
+    border-top-left-radius: 0.5em 100%;
+    border-bottom-left-radius: 0.5em 100%;
+}
+.math .right-bracket-rounded {
+    border-top-right-radius: 0.5em 100%;
+    border-bottom-right-radius: 0.5em 100%;
+}
+.math .left-brace0, .math .right-brace2 {
+    border-left: 0.14ex solid;
     border-top: 0.1ex solid;
     border-top-left-radius: 0.5em 1ex;
     width: 0.25em;
 }
-.math .leftbrace2 {
-    border-right: 0.1ex solid;
+.math .left-brace1, .math .right-brace3 {
+    border-right: 0.14ex solid;
     border-bottom: 0.1ex solid;
     border-bottom-right-radius: 0.5em 1ex;
     width: 0.25em;
 }
-.math .leftbrace3 {
-    border-right: 0.1ex solid;
+.math .left-brace2, .math .right-brace0 {
+    border-right: 0.14ex solid;
     border-top: 0.1ex solid;
     border-top-right-radius: 0.5em 1ex;
     width: 0.25em;
 }
-.math .leftbrace4 {
-    border-left: 0.1ex solid;
+.math .left-brace3, .math .right-brace1 {
+    border-left: 0.14ex solid;
     border-bottom: 0.1ex solid;
     border-bottom-left-radius: 0.5em 1ex;
     width: 0.25em;
 }
-.math .slash1 {
-    width: 0;
-    height: 0;
-    border-bottom: 2ex solid transparent;
-    border-left: 0.5em solid black;
-}
-.math .slash2 {
-    width: 0;
-    height: 0;
-    border-bottom: 2ex solid transparent;
-    border-left: 0.5em solid white;
-}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
-<div class="math" style="width:6em;height:12ex;">
-<div style="left:2.05em;top:3ex;" class="slash1"></div>
-<div style="left:2em;top:3ex;" class="slash2"></div>
-
-<div style="left:1.25em;top:0.5ex;height:1ex;" class="leftbrace1"></div>
-<div style="left:1em;top:1.5ex;height:1ex;" class="leftbrace2"></div>
-<div style="left:1em;top:2.5ex;height:1ex;" class="leftbrace3"></div>
-<div style="left:1.25em;top:3.5ex;height:1ex;" class="leftbrace4"></div>
-
-<div style="left:2em;top:2ex;">{x}</div>
-
-<div style="left:4.25em;top:0.5ex;height:2ex;" class="leftbrace3"></div>
-<div style="left:4.5em;top:2.5ex;height:2ex;" class="leftbrace4"></div>
-<div style="left:4.5em;top:4.5ex;height:2ex;" class="leftbrace1"></div>
-<div style="left:4.25em;top:6.5ex;height:2ex;" class="leftbrace2"></div>
+<h1>Chapter 1</h1>
+<p>中文文字<sup><a id="fnback-1" href="#footnote-1">1</a></sup></p>
+<p>Hello world<sup><a id="fnback-2" href="#footnote-2">2</a></sup>. It is a math <i>ξα+x<sub>i<sup>m-n</sup></sub>=y<sup>2+a<sub>0</sub></sup></i></p>
+<p>Some other math: <i>∫<sub>0</sub><sup>1</sup>x dx</i></p>
+<div class="math" style="width:4em;height:6ex;">
+<div style="left:0.0em;top:1.53662109375em;">a</div>
+<div style="left:0.52783203125em;top:1.53662109375em;">f</div>
+<div style="left:0.8955078125em;top:0.768310546875em;">(</div>
+<div style="left:2.44140625em;top:1.53662109375em;font-size:0.5em;">m</div>
+<div style="left:3.28466796875em;top:1.53662109375em;font-size:0.5em;">+</div>
+<div style="left:3.9833984375em;top:1.53662109375em;font-size:0.5em;">n</div>
+<div style="left:2.44140625em;top:3.0732421875em;font-size:0.5em;">h</div>
+<div style="left:3.0078125em;top:3.0732421875em;font-size:0.5em;">e</div>
+<div style="left:3.4951171875em;top:3.0732421875em;font-size:0.5em;">l</div>
+<div style="left:3.68798828125em;top:3.0732421875em;font-size:0.5em;">l</div>
+<div style="left:3.9228515625em;top:3.0732421875em;font-size:0.5em;">o</div>
+<div style="left:2.302001953125em;top:0.768310546875em;">]</div>
+<div style="left:1.628196022727273em;top:4.260631214488637em;font-size:0.5499999999999999em;">{</div>
+<div style="left:2.14873046875em;top:4.763525390625em;font-size:0.5em;">i</div>
+<div style="left:4.062988281250001em;top:7.68310546875em;font-size:0.3em;">2</div>
+<div style="left:2.8171875em;top:4.763525390625em;font-size:0.5em;">+</div>
+<div style="left:3.612109375em;top:4.763525390625em;font-size:0.5em;">j</div>
+<div style="left:6.527180989583334em;top:7.68310546875em;font-size:0.3em;">2</div>
+<div style="left:3.9051846590909096em;top:4.260631214488637em;font-size:0.5499999999999999em;">}</div>
+<div style="left:2.627197265625em;top:1.53662109375em;">α</div>
+<div style="left:3.304931640625em;top:1.53662109375em;">f</div>
+<div style="left:3.672607421875em;top:1.53662109375em;">a</div>
+<div style="left:4.200439453125em;top:1.53662109375em;">(</div>
+<div style="left:4.489501953125em;top:1.53662109375em;">g</div>
+<div style="left:5.076904296875em;top:1.53662109375em;">)</div>
+<div style="left:10.80419921875em;top:1.53662109375em;font-size:0.5em;">u</div>
+<div style="left:11.32861328125em;top:1.53662109375em;font-size:0.5em;">p</div>
+<div style="left:10.80419921875em;top:3.0732421875em;font-size:0.5em;">d</div>
+<div style="left:11.37939453125em;top:3.0732421875em;font-size:0.5em;">o</div>
+<div style="left:11.98779296875em;top:3.0732421875em;font-size:0.5em;">w</div>
+<div style="left:12.75146484375em;top:3.0732421875em;font-size:0.5em;">n</div>
+<div style="left:13.8720703125em;top:3.0732421875em;font-size:0.5em;">D</div>
+<div style="left:14.5703125em;top:3.0732421875em;font-size:0.5em;">o</div>
+<div style="left:15.1787109375em;top:3.0732421875em;font-size:0.5em;">w</div>
+<div style="left:15.9423828125em;top:3.0732421875em;font-size:0.5em;">n</div>
+<div style="left:8.281494140625em;top:1.53662109375em;">+</div>
+<div style="left:8.980224609375em;top:1.53662109375em;">b</div>
+<div style="left:9.555419921875em;top:1.53662109375em;">0</div>
+<div style="left:10.124755859375em;top:1.53662109375em;">1</div>
+<div style="left:10.659423828125em;top:1.53662109375em;">.</div>
+<div style="left:10.892822265625em;top:1.53662109375em;">2</div>
+<div style="left:11.423583984375em;top:1.53662109375em;">3</div>
+<div style="left:12.305908203125em;top:0.125em;height:1.0899658203125em;" class="left-brace0"></div>
+<div style="left:12.055908203125em;top:1.2149658203125em;height:1.0899658203125em;" class="left-brace1"></div>
+<div style="left:12.055908203125em;top:2.304931640625em;height:1.0899658203125em;" class="left-brace2"></div>
+<div style="left:12.305908203125em;top:3.3948974609375em;height:1.0899658203125em;" class="left-brace3"></div>
+<div style="left:12.555908203125em;top:0.0em;">{</div>
+<div style="left:12.881103515625em;top:0.0em;">h</div>
+<div style="left:13.410888671875em;top:0.0em;">M</div>
+<div style="left:14.272216796875em;top:0.0em;">]</div>
+<div style="left:14.597412109375em;top:0.0em;">q</div>
+<div style="left:15.726806640625em;top:0.0em;">b</div>
+<div style="left:15.726806640625em;top:1.53662109375em;">D</div>
+<div style="left:16.425048828125em;top:1.53662109375em;">-</div>
+<div style="left:16.949462890625em;top:1.53662109375em;">c</div>
+<div style="left:12.555908203125em;top:3.0732421875em;">b</div>
+<div style="left:13.131103515625em;top:3.0732421875em;">l</div>
+<div style="left:13.369873046875em;top:3.0732421875em;">a</div>
+<div style="left:15.726806640625em;top:3.0732421875em;">b</div>
+<div style="left:16.302001953125em;top:3.0732421875em;">l</div>
+<div style="left:16.540771484375em;top:3.0732421875em;">a</div>
+<div style="left:17.461669921875em;top:0.125em;height:4.35986328125em;" class="right-bracket-rounded"></div>
 </div>
+<div class="math" style="width:4em;height:6ex;">
+	<div style="left:0;top:1.7ex;">x+</div>
+	<div id="mathchar" style="left:2em;top:0;">a</div>
+    <div class="n" style="left:1.5em;top:3ex">1+</div>
+	<div style="left:2.5em;top:3ex">b</div>
+	<div class="hline" style="left:1.2em;top:3ex;width:2em;">&nbsp;</div>
+</div>
+This is inline: <div class="math math-inline" style="width:4em;height:6ex;vertical-align:-2.25ex;">
+	<div style="left:0;top:1.5ex;">gf</div>
+    <div style="left:0.5em;top:1.5ex;">f+</div>
+	<div id="mathchar" style="left:2em;top:0;">a</div>
+    <div class="n" style="left:1.5em;top:3ex">1+</div>
+	<div style="left:2.5em;top:3ex">b</div>
+	<div class="hline" style="left:1.2em;top:3ex;width:2em;">&nbsp;</div>
+</div>+ math in the line.<br/>
+<p>This is a very long line after the math.
+<img src="image.svg" style="width:10em;height:2em;" />
+This is a very long line after the math.
+ALL:  !"#$%()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǺǻǼǽǾǿȘșȚțɐɑɒɓɔɕɖɗɘəɚɛɜɝɞɟɠɡɢɣɤɥɦɧɨɩɪɫɬɭɮɯɰɱɲɳɴɵɶɷɸɹɺɻɼɽɾɿʀʁʂʃʄʅʆʇʈʉʊʋʌʍʎʏʐʑʒʓʔʕʖʗʘʙʚʛʜʝʞʟʠʡʢʣʤʥʦʧʨʰʱʲʳʴʵʶʷʸʹʺʻʼʽʾʿˀˁ˂˃˄˅ˆˇˈˉˊˋˌˍˎˏːˑ˒˓˔˕˖˗˘˙˚˛˜˝˞ˠˡˢˣˤ˥˦˧˨˩̴̵̶̷̸̡̢̧̨̛̖̗̘̙̜̝̞̟̠̣̤̥̦̩̪̫̬̭̮̯̰̱̲̳̹̺̻̼̀́̂̃̄̅̆̇̈̉̊̋̌̍̎̏̐̑̒̓̔̽̾̿̀́̈́̕̚ͅʹ͵ͺ;΄΅ΆΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϐϑϒϓϔϕϖϚϜϞϠϮϯϰϱϲЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџѢѣѪѫҐґҒғҔҕҖҗҘҙҚқҜҝҞҟҠҡҢңҤҥҦҧҨҩҪҫҬҭҮүҰұҲҳҴҵҶҷҸҹҺһҼҽҾҿӀӁӂӃӄӇӈӋӌְֱֲֳִֵֶַָֹֻּֽ־ֿ׀ׁׂ׃אבגדהוזחטיךכלםמןנסעףפץצקרשתװױײ׳״ẀẁẂẃẄẅỲỳ           ​‌‍‎‏‐‑‒–—―‖‗‘’‚‛“”„‟†‡•‣․‥…‧  ‪‫‬‭‮‰‱′″‴‵‶‷‸‹›※‼‽‾⁀⁁⁂⁃⁄⁰⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎₠₡₢₣₤₥₦₧₨₩₪€℀℁ℂ℃℄℅℆ℇ℈℉ℊℋℌℍℎℏℐℑℒℓ℔ℕ№℗℘ℙℚℛℜℝ℞℟℠℡™℣ℤ℥Ω℧ℨ℩KÅℬℭ℮ℯℰℱℲℳℴℵℶℷℸ⅛⅜⅝⅞←↑→↓↔↕↖↗↘↙↚↛↜↝↞↟↠↡↢↣↤↥↦↧↨↩↪↫↬↭↮↯↰↱↲↳↴↵↶↷↸↹↺↻↼↽↾↿⇀⇁⇂⇃⇄⇅⇆⇇⇈⇉⇊⇋⇌⇍⇎⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇚⇛⇜⇝⇞⇟⇠⇡⇢⇣⇤⇥⇦⇧⇨⇩⇪∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳∴∵∶∷∸∹∺∻∼∽∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⌂⌆⌈⌉⌊⌋⌠⌡⌢⌣␀␁␂␃␄␅␆␇␈␉␊␋␌␍␎␏␐␑␒␓␔␕␖␗␘␙␚␛␜␝␞␟␠␡␢␣␤─━│┃┄┅┆┇┈┉┊┋┌┍┎┏┐┑┒┓└┕┖┗┘┙┚┛├┝┞┟┠┡┢┣┤┥┦┧┨┩┪┫┬┭┮┯┰┱┲┳┴┵┶┷┸┹┺┻┼┽┾┿╀╁╂╃╄╅╆╇╈╉╊╋╌╍╎╏═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬╭╮╯╰╱╲╳╴╵╶╷╸╹╺╻╼╽╾╿▀▂▃▄▅▆▇█▉▊▋▌▍▎▏▐░▒▓▔▕■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮☺☻☼♀♂♠♣♥♦♪♫♭♮♯ﬁﬂﬞ﻿
+</p>
+<footer>
+<p><a id="footnote-1" href="#fnback-1">1.</a> Footnote content 1</p>
+<p><a id="footnote-2" href="#fnback-2">2.</a> Footnote content 2</p>
+</footer>
 </body>
 </html>

@@ -96,7 +96,7 @@ class MathTexAST:
                     else:
                         new_cmd = MathTexAST.command_node(MathTexAST.CMD_SUB_SUP, 3)
                         new_cmd.children = [top, None, None]
-                    if child.command == "_" and len(child.children) > 0:
+                    if child.command == "^" and len(child.children) > 0:
                         new_cmd.children[1] = child.children[0]
                     elif len(child.children) > 0:
                         new_cmd.children[2] = child.children[0]
