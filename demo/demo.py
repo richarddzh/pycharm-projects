@@ -3,7 +3,7 @@ from mathtex.htmlrender import HtmlRender
 
 p = MathTexParser()
 p.begin_parse()
-p.parse_line(r"\begin{array}af\end{array}_{\left\{i^2+j^2\right\}}"
+p.parse_line(r"\begin{array}af\end{array}_{\left\{i_2+j^2\right\}}"
              r"^{\left(\begin{array}m+n\\hello\end{array}\right]}"
              r"\alpha fa(g)^{\begin{array}up\\down&Down\end{array}}"
              r"+b01.23"

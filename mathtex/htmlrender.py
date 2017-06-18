@@ -158,7 +158,7 @@ class HtmlRender:
         elem.width = main_item.width
         elem.height = main_item.height
         elem.baseline = main_item.baseline
-        sub_size = (font_size + 0.25) / 2.5
+        sub_size = (font_size + 1) / 3
         if children[1] is not None:
             sub_item = self.render(children[1], sub_size)
             sub_item.x = main_item.width + sub_size * self.char_margin
