@@ -8,6 +8,8 @@ class MathTexAST:
     TEXT_NODE = 3
     ENV_NODE = 4
     CMD_NODE = 5
+    CMD_LEFT_RIGHT = "left+right"
+    CMD_SUB_SUP = "sub+sup"
 
     def __init__(self, node_type):
         self.children = []  # type: List[MathTexAST]
@@ -78,3 +80,39 @@ class MathTexAST:
             return self.text
         else:
             return self.children[0].get_first_string()
+
+    def prepare_render(self):
+        stack = []  # type: List[MathTexAST]
+        if self.children is None or len(self.children) < 2:
+            return
+        if self.node_type != MathTexAST.BLOCK_NODE and self.node_type != MathTexAST.CELL_NODE:
+            return
+        for child in self.children:
+            if child.command == "_" or child.command == "^":
+                if len(stack) > 0:
+                    top = stack.pop()
+                    if top.command == MathTexAST.CMD_SUB_SUP:
+                        new_cmd = top
+                    else:
+                        new_cmd = MathTexAST.command_node(MathTexAST.CMD_SUB_SUP, 3)
+                        new_cmd.children = [top, None, None]
+                    if child.command == "_" and len(child.children) > 0:
+                        new_cmd.children[1] = child.children[0]
+                    elif len(child.children) > 0:
+                        new_cmd.children[2] = child.children[0]
+                    stack.append(new_cmd)
+            elif child.command == "right":
+                inner = []
+                while len(stack) > 0:
+                    top = stack.pop()
+                    if top.command == "left":
+                        new_cmd = MathTexAST.command_node(MathTexAST.CMD_LEFT_RIGHT, 3)
+                        new_block = MathTexAST.block_node(inner)
+                        new_cmd.children = [top.children[0], child.children[0], new_block]
+                        stack.append(new_cmd)
+                        break
+                    else:
+                        inner.insert(0, top)
+            else:
+                stack.append(child)
+        self.children = stack

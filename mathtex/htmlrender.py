@@ -15,9 +15,6 @@ class RowColumnMeta:
         self.baseline = 0
 
 
-CMD_LEFT_RIGHT = "left+right"
-
-
 class HtmlRender:
     def __init__(self):
         self.html_elements = []
@@ -29,34 +26,6 @@ class HtmlRender:
     @staticmethod
     def get_baseline(line_height, font_size):
         return (line_height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
-
-    @staticmethod
-    def pair_left_right_command(node: MathTexAST):
-        stack = []
-        new_children = []
-        for i in range(0, len(node.children)):
-            child = node.children[i]
-            if child.node_type != MathTexAST.CMD_NODE:
-                new_children.append(child)
-                continue
-            if child.command == "left" and len(child.children) > 0:
-                child.begin_index = len(new_children)
-                stack.append(child)
-            elif child.command == "right" and len(child.children) > 0 and len(stack) > 0:
-                left = stack.pop()  # type: MathTexAST
-                begin_index = left.begin_index
-                if begin_index >= len(new_children):
-                    new_children += left.children[0:1]
-                    new_children += child.children[0:1]
-                else:
-                    new_cmd = MathTexAST.command_node(CMD_LEFT_RIGHT, 3)
-                    new_block = MathTexAST.block_node(new_children[begin_index:])
-                    new_cmd.children += left.children[0:1]
-                    new_cmd.children += child.children[0:1]
-                    new_cmd.children.append(new_block)
-                    new_children = new_children[0:begin_index]
-                    new_children.append(new_cmd)
-        node.children = new_children
 
     def align_children(self, elem: HtmlElement, font_size):
         elem.width = 0
@@ -105,13 +74,12 @@ class HtmlRender:
         children.for_each_not_none(update_cell_position)
 
     def render(self, node: MathTexAST, font_size) -> HtmlElement:
+        node.prepare_render()
         if node.node_type == MathTexAST.TEXT_NODE:
             return self.render_text(node.text, font_size)
         if node.node_type == MathTexAST.BLOCK_NODE:
-            self.pair_left_right_command(node)
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.CELL_NODE:
-            self.pair_left_right_command(node)
             return self.render_block(node.children, font_size)
         if node.node_type == MathTexAST.ENV_NODE:
             return self.render_env(node.children, font_size)
@@ -158,7 +126,7 @@ class HtmlRender:
         return elem
 
     def render_command(self, cmd, children: List[MathTexAST], font_size) -> HtmlElement:
-        if cmd == CMD_LEFT_RIGHT:
+        if cmd == MathTexAST.CMD_LEFT_RIGHT:
             return self.render_cmd_left_right(children, font_size)
 
     def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
