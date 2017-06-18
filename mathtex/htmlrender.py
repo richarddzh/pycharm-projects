@@ -61,7 +61,7 @@ class HtmlRender:
             if i > 0:
                 rows[i].y = rows[i-1].y + rows[i-1].height + self.line_margin * font_size
             elem.height = rows[i].y + rows[i].height
-        elem.baseline = self.get_baseline(elem.height, font_size)
+        elem.update_baseline(font_size)
         for j in range(0, children.width):
             if j > 0:
                 columns[j].x = columns[j-1].x + columns[j-1].width + self.cell_margin * font_size
@@ -90,9 +90,9 @@ class HtmlRender:
     def render_text(self, text, font_size, middle_align_with=None) -> HtmlElement:
         elem = HtmlElement(width=0, height=self.line_height * font_size)
         if middle_align_with is not None:
-            elem.baseline = self.get_baseline(elem.height, middle_align_with)
+            elem.update_baseline(middle_align_with)
         else:
-            elem.baseline = self.get_baseline(elem.height, font_size)
+            elem.update_baseline(font_size)
         for i in range(0, len(text)):
             c = text[i]
             if i > 0:
@@ -136,9 +136,15 @@ class HtmlRender:
         right = children[1].get_first_string()
         elem = HtmlElement()
         if len(left) == 1 and left in "([{":
-            elem.children.append(self.render_text(left, brace_size, font_size))
+            if brace_size <= 1:
+                elem.children.append(self.render_text(left, brace_size, font_size))
+            else:
+                elem.children.append(HtmlElement.create_brace(left, middle_item.height, font_size))
         elem.children.append(middle_item)
         if len(right) == 1 and right in ")]}":
-            elem.children.append(self.render_text(right, brace_size, font_size))
+            if brace_size <= 1:
+                elem.children.append(self.render_text(right, brace_size, font_size))
+            else:
+                elem.children.append(HtmlElement.create_brace(right, middle_item.height, font_size))
         self.align_children(elem, font_size)
         return elem

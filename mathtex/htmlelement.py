@@ -1,3 +1,4 @@
+from mathtex.fontmetric import FONT_METRICS
 from typing import List
 
 
@@ -34,3 +35,35 @@ class HtmlElement:
         html_class = "" if self.css_class is None else ' class="{0}"'.format(self.css_class)
         return '<{0} style="{1}"{2}>{3}</{0}>'.format(
             self.name, html_pos + html_width + html_height + html_font_size, html_class, html_text)
+
+    def update_baseline(self, font_size):
+        self.baseline = (self.height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
+
+    @staticmethod
+    def create_brace(brace, brace_size, font_size):
+        is_left = brace in "([{"
+        sides = "left" if is_left else "right"
+        rounded = "-rounded" if brace in "()" else ""
+        height = brace_size - font_size / 4
+        if brace in "([])":
+            elem = HtmlElement(width=0.25, height=height)
+            item = HtmlElement()
+            item.css_class = "{0}-bracket{1}".format(sides, rounded)
+            item.height = height
+            elem.children.append(item)
+            elem.update_baseline(font_size)
+            return elem
+        elif brace in "{}":
+            elem = HtmlElement(width=0.5, height=height)
+            x_left = [1, 0, 0, 1]
+            x_right = [0, 1, 1, 0]
+            for i in range(4):
+                item = HtmlElement()
+                item.css_class = "{0}-brace{1}".format(sides, i)
+                item.y = i / 4 * height
+                item.x = (x_left[i] if is_left else x_right[i]) * 0.25
+                item.height = height / 4
+                elem.children.append(item)
+                elem.update_baseline(font_size)
+            return elem
+
