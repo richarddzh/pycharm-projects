@@ -36,8 +36,10 @@ class HtmlElement:
         return '<{0} style="{1}"{2}>{3}</{0}>'.format(
             self.name, html_pos + html_width + html_height + html_font_size, html_class, html_text)
 
-    def update_baseline(self, font_size):
-        self.baseline = (self.height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
+    def update_baseline(self, font_size, pseudo_height=None):
+        if pseudo_height is None:
+            pseudo_height = self.height
+        self.baseline = (pseudo_height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
 
     @staticmethod
     def create_brace(brace, brace_size, font_size):
@@ -67,3 +69,6 @@ class HtmlElement:
                 elem.update_baseline(font_size)
             return elem
 
+    @staticmethod
+    def create_horizontal_line(x, y, width):
+        return HtmlElement(x=x, y=y, width=width, css_class="hline")

@@ -133,6 +133,8 @@ class HtmlRender:
             return self.render_cmd_left_right(children, font_size)
         if cmd == MathTexAST.CMD_SUB_SUP:
             return self.render_cmd_sub_sup(children, font_size)
+        if cmd == "frac":
+            return self.render_cmd_fraction(children, font_size)
         return self.render_text(cmd, font_size, italic=False)
 
     def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
@@ -183,4 +185,21 @@ class HtmlRender:
             else:
                 sup_item.y = main_item.y + main_item.height / 2
                 elem.height += delta
+        return elem
+
+    def render_cmd_fraction(self, children: List[MathTexAST], font_size) -> HtmlElement:
+        elem = HtmlElement()
+        up_item = self.render(children[0], font_size)
+        down_item = self.render(children[1], font_size)
+        elem.width = max(up_item.width, down_item.width) + font_size / 2
+        elem.height = up_item.height + down_item.height + self.line_margin * font_size
+        elem.update_baseline(font_size, pseudo_height=up_item.height * 2 + self.line_margin * font_size)
+        up_item.x = (elem.width - up_item.width) / 2
+        down_item.x = (elem.width - down_item.width) / 2
+        down_item.y = elem.height - down_item.height
+        line = HtmlElement.create_horizontal_line(
+            font_size / 8,
+            up_item.height + self.line_margin * font_size / 2,
+            elem.width - font_size / 4)
+        elem.children = [up_item, down_item, line]
         return elem
