@@ -87,7 +87,7 @@ class HtmlRender:
             return self.render_command(node.command, node.children, font_size)
         return HtmlElement(width=0, height=0)
 
-    def render_text(self, text, font_size, middle_align_with=None) -> HtmlElement:
+    def render_text(self, text, font_size, middle_align_with=None, italic=True, bold=False) -> HtmlElement:
         elem = HtmlElement(width=0, height=self.line_height * font_size)
         if middle_align_with is not None:
             elem.update_baseline(middle_align_with)
@@ -101,7 +101,10 @@ class HtmlRender:
                 bearing = min(FONT_METRICS.get_glyph(pre_c).right_bearing, FONT_METRICS.get_glyph(c).left_bearing)
                 if bearing > 0:
                     elem.width -= bearing * font_size
-            child = HtmlElement(x=elem.width, y=0, text=c, font_size=font_size)
+            css_class = "bold" if bold else None
+            if c.isalpha() and italic:
+                css_class = "bold italic" if bold else "italic"
+            child = HtmlElement(x=elem.width, y=0, text=c, font_size=font_size, css_class=css_class)
             elem.width += FONT_METRICS.get_glyph(c).width * font_size
             elem.children.append(child)
         return elem
@@ -130,6 +133,7 @@ class HtmlRender:
             return self.render_cmd_left_right(children, font_size)
         if cmd == MathTexAST.CMD_SUB_SUP:
             return self.render_cmd_sub_sup(children, font_size)
+        return self.render_text(cmd, font_size, italic=False)
 
     def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
         middle_item = self.render(children[2], font_size)

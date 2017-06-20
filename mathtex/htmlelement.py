@@ -3,7 +3,7 @@ from typing import List
 
 
 class HtmlElement:
-    def __init__(self, x=0, y=0, width=None, height=None, font_size=1, text=None):
+    def __init__(self, x=0, y=0, width=None, height=None, font_size=1, text=None, css_class=None):
         self.name = "div"
         self.x = x  # x-offset relative to parent
         self.y = y  # y-offset relative to parent
@@ -11,7 +11,7 @@ class HtmlElement:
         self.height = height  # element height
         self.baseline = 0  # baseline relative to element top
         self.font_size = font_size  # font-size relative to 1em
-        self.css_class = None
+        self.css_class = css_class
         self.text = text
         self.children = []  # type: List[HtmlElement]
 
