@@ -3,11 +3,11 @@ from mathtex.htmlrender import HtmlRender
 
 p = MathTexParser()
 p.begin_parse()
-p.parse_line(r"\begin{array}af\end{array}_{\left\{i_2+j^2\right\}}"
+p.parse_line(r"\begin{array}{ccc}af\end{array}_{\left\{i_2+j^2\right\}}"
              r"^{\left(\begin{array}m+n\\hello\end{array}\right]}"
              r"\alpha fa(g)^{\begin{array}up\\down&Down\end{array}}"
              r"+b01.23"
-             r"\left\{\begin{array}"
+             r"\left\{\begin{array}{lr}"
              r"\left\{hM\right]q&b\\"
              r"&D-c\\bla&bla"
              r"\end{array}\right)")

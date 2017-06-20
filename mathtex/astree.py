@@ -18,6 +18,7 @@ class MathTexAST:
         self.command = ""
         self.arg_number = 0
         self.node_type = node_type
+        self.parameter = ""
 
     @staticmethod
     def block_node(children):
@@ -81,7 +82,35 @@ class MathTexAST:
         else:
             return self.children[0].get_first_string()
 
+    def get_all_string(self):
+        if self.node_type == MathTexAST.TEXT_NODE or len(self.children) < 1:
+            return self.text
+        all_string = ""
+        for child in self.children:
+            all_string += child.get_all_string()
+        return all_string
+
     def prepare_render(self):
+        self.prepare_render_special_command()
+        self.prepare_render_special_env()
+
+    def prepare_render_special_env(self):
+        if self.node_type != MathTexAST.ENV_NODE or self.env_name != "array":
+            return
+        if self.children is None or len(self.children) < 1:
+            return
+        line = self.children[0]
+        if line is None or line.children is None or len(line.children) < 1:
+            return
+        cell = line.children[0]
+        if cell is None or cell.children is None or len(cell.children) < 1:
+            return
+        parameter = cell.children[0]
+        if parameter.node_type == MathTexAST.BLOCK_NODE:
+            cell.children = cell.children[1:]
+            self.parameter = parameter.get_all_string()
+
+    def prepare_render_special_command(self):
         stack = []  # type: List[MathTexAST]
         if self.children is None or len(self.children) < 2:
             return
