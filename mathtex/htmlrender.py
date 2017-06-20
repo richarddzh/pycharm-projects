@@ -36,27 +36,33 @@ class HtmlRender:
                 elem.width += self.char_margin * font_size
             child = elem.children[i]
             child.x = elem.width
-            if child.height > elem.height:
-                elem.height = child.height
             if child.baseline > elem.baseline:
                 elem.baseline = child.baseline
             elem.width += child.width
         for child in elem.children:
             child.y = elem.baseline - child.baseline
+            if child.y + child.height > elem.height:
+                elem.height = child.y + child.height
         return elem
 
     def align_children_grid(self, elem: HtmlElement, children: Array2D[HtmlElement], font_size):
         rows = Array1D(children.height, lambda: RowColumnMeta())
         columns = Array1D(children.width, lambda: RowColumnMeta())
 
-        def update_row_column_meta(y, x, item: HtmlElement):
-            if item.height > rows[y].height:
-                rows[y].height = item.height
+        def update_row_column_meta1(y, x, item: HtmlElement):
             if item.baseline > rows[y].baseline:
                 rows[y].baseline = item.baseline
             if item.width > columns[x].width:
                 columns[x].width = item.width
-        children.for_each_not_none(update_row_column_meta)
+
+        def update_row_column_meta2(y, _, item: HtmlElement):
+            y_offset = rows[y].baseline - item.baseline
+            new_height = y_offset + item.height
+            if new_height > rows[y].height:
+                rows[y].height = new_height
+
+        children.for_each_not_none(update_row_column_meta1)
+        children.for_each_not_none(update_row_column_meta2)
         for i in range(0, children.height):
             if i > 0:
                 rows[i].y = rows[i-1].y + rows[i-1].height + self.line_margin * font_size

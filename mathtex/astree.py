@@ -10,6 +10,7 @@ class MathTexAST:
     CMD_NODE = 5
     CMD_LEFT_RIGHT = "left+right"
     CMD_SUB_SUP = "sub+sup"
+    ROOT_ENV = "ROOT_ENV"
 
     def __init__(self, node_type):
         self.children = []  # type: List[MathTexAST]

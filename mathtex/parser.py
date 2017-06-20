@@ -10,8 +10,6 @@ RE_END_ENV = re.compile(r"\\end\{([A-Za-z]+)\}")
 RE_WHITESPACE = re.compile(r"\s+")
 RE_COMMENT = re.compile(r"%.*")
 
-ROOT_ENV = "ROOT_ENV"
-
 BEGIN_CELL = 1
 BEGIN_LINE = 2
 BEGIN_BLOCK = 3
@@ -75,7 +73,7 @@ class MathTexParser:
             self.stack.append(env_node)
 
     def begin_parse(self):
-        self.stack = [ROOT_ENV, BEGIN_ENV]
+        self.stack = [MathTexAST.ROOT_ENV, BEGIN_ENV]
 
     def end_parse(self):
         self.end_env()

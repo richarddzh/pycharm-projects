@@ -36,6 +36,15 @@ class HtmlElement:
         return '<{0} style="{1}"{2}>{3}</{0}>'.format(
             self.name, html_pos + html_width + html_height + html_font_size, html_class, html_text)
 
+    def to_html_div(self) -> str:
+        inner_html = self.to_html()
+        begin_div = '<div class="math" style="width:{0}em;height:{1}em;vertical-align:{2}em;">'.format(
+            self.width,
+            self.height,
+            self.baseline - self.height)
+        lines = [begin_div, inner_html, "</div>"]
+        return '\n'.join(lines)
+
     def update_baseline(self, font_size, pseudo_height=None):
         if pseudo_height is None:
             pseudo_height = self.height
