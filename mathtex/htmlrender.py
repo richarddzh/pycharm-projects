@@ -153,13 +153,15 @@ class HtmlRender:
             if brace_size <= 1:
                 elem.children.append(self.render_text(left, brace_size, font_size))
             else:
-                elem.children.append(HtmlElement.create_brace(left, middle_item.height, font_size))
+                elem.children.append(HtmlElement.create_brace(
+                    left, middle_item.height, middle_item.baseline, font_size))
         elem.children.append(middle_item)
         if len(right) == 1 and right in ")]}":
             if brace_size <= 1:
                 elem.children.append(self.render_text(right, brace_size, font_size))
             else:
-                elem.children.append(HtmlElement.create_brace(right, middle_item.height, font_size))
+                elem.children.append(HtmlElement.create_brace(
+                    right, middle_item.height, middle_item.baseline, font_size))
         self.align_children(elem, font_size)
         return elem
 
@@ -170,7 +172,7 @@ class HtmlRender:
         elem.width = main_item.width
         elem.height = main_item.height
         elem.baseline = main_item.baseline
-        sub_size = (font_size + 1) / 3
+        sub_size = (font_size + 3) / 5
         if children[1] is not None:
             sub_item = self.render(children[1], sub_size)
             sub_item.x = main_item.width + sub_size * self.char_margin

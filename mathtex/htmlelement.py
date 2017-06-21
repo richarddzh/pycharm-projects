@@ -3,13 +3,13 @@ from typing import List
 
 
 class HtmlElement:
-    def __init__(self, x=0, y=0, width=None, height=None, font_size=1, text=None, css_class=None):
+    def __init__(self, x=0, y=0, width=None, height=None, baseline=0, font_size=1, text=None, css_class=None):
         self.name = "div"
         self.x = x  # x-offset relative to parent
         self.y = y  # y-offset relative to parent
         self.width = width  # element width
         self.height = height  # element height
-        self.baseline = 0  # baseline relative to element top
+        self.baseline = baseline  # baseline relative to element top
         self.font_size = font_size  # font-size relative to 1em
         self.css_class = css_class
         self.text = text
@@ -51,18 +51,18 @@ class HtmlElement:
         self.baseline = (pseudo_height - FONT_METRICS.height * font_size) / 2 + FONT_METRICS.baseline * font_size
 
     @staticmethod
-    def create_brace(brace, brace_size, font_size):
+    def create_brace(brace, brace_size, brace_baseline, font_size):
         is_left = brace in "([{"
         sides = "left" if is_left else "right"
         rounded = "-rounded" if brace in "()" else ""
         height = brace_size - font_size / 4
+        baseline = brace_baseline - font_size / 8
         if brace in "([])":
-            elem = HtmlElement(width=0.25, height=height)
+            elem = HtmlElement(width=0.25, height=height, baseline=baseline)
             item = HtmlElement()
             item.css_class = "{0}-bracket{1}".format(sides, rounded)
             item.height = height
             elem.children.append(item)
-            elem.update_baseline(font_size)
             return elem
         elif brace in "{}":
             elem = HtmlElement(width=0.5, height=height)
