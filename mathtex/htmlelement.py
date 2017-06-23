@@ -3,7 +3,7 @@ from typing import List
 
 
 class HtmlElement:
-    def __init__(self, x=0, y=0, width=None, height=None, baseline=0, font_size=1, text=None, css_class=None):
+    def __init__(self, x=0.0, y=0.0, width=None, height=None, baseline=0, font_size=1, text=None, css_class=None):
         self.name = "div"
         self.x = x  # x-offset relative to parent
         self.y = y  # y-offset relative to parent
@@ -65,7 +65,7 @@ class HtmlElement:
             elem.children.append(item)
             return elem
         elif brace in "{}":
-            elem = HtmlElement(width=0.5, height=height)
+            elem = HtmlElement(width=0.5, height=height, baseline=baseline)
             x_left = [1, 0, 0, 1]
             x_right = [0, 1, 1, 0]
             for i in range(4):
@@ -75,9 +75,23 @@ class HtmlElement:
                 item.x = (x_left[i] if is_left else x_right[i]) * 0.25
                 item.height = height / 4
                 elem.children.append(item)
-                elem.update_baseline(font_size)
             return elem
 
     @staticmethod
     def create_horizontal_line(x, y, width):
         return HtmlElement(x=x, y=y, width=width, css_class="hline")
+
+    @staticmethod
+    def create_square_root_group(width, height, font_size):
+        line = HtmlElement.create_horizontal_line(0.3 * font_size, 0.1 * font_size, width - 0.5 * font_size)
+        root1 = HtmlElement(x=0.1 * font_size,
+                            y=line.y,
+                            width=0.2 * font_size,
+                            height=height - 0.3 * font_size,
+                            css_class="sqrt1")
+        root2 = HtmlElement(x=0,
+                            y=line.y + 0.6 * height,
+                            width=0.1 * font_size,
+                            height=0.4 * height - 0.3 * font_size,
+                            css_class="sqrt2")
+        return [line, root1, root2]

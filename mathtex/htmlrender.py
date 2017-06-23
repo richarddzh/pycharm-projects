@@ -141,6 +141,8 @@ class HtmlRender:
             return self.render_cmd_sub_sup(children, font_size)
         if cmd == "frac":
             return self.render_cmd_fraction(children, font_size)
+        if cmd == "sqrt":
+            return self.render_cmd_square_root(children, font_size)
         return self.render_text(cmd, font_size, italic=False)
 
     def render_cmd_left_right(self, children: List[MathTexAST], font_size) -> HtmlElement:
@@ -210,4 +212,15 @@ class HtmlRender:
             up_item.height + self.line_margin * font_size / 2,
             elem.width - font_size / 4)
         elem.children = [up_item, down_item, line]
+        return elem
+
+    def render_cmd_square_root(self, children: List[MathTexAST], font_size) -> HtmlElement:
+        elem = HtmlElement()
+        inner_item = self.render(children[0], font_size)
+        inner_item.x = 0.4 * font_size
+        inner_item.y = 0.1 * font_size
+        elem.width = inner_item.x + inner_item.width + 0.2 * font_size
+        elem.height = inner_item.y + inner_item.height
+        elem.baseline = inner_item.y + inner_item.baseline
+        elem.children = [inner_item] + HtmlElement.create_square_root_group(elem.width, elem.height, font_size)
         return elem
