@@ -10,3 +10,5 @@ tools/**/packages
 .vs
 .vs/
 **/.vs/
+.DS_Store
+

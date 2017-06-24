@@ -79,64 +79,49 @@
     border-top-right-radius: 100%;
 }
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
-<h1>Chapter 1</h1>
-<p>中文文字<sup><a id="fnback-1" href="#footnote-1">1</a></sup></p>
-<p>Hello world<sup><a id="fnback-2" href="#footnote-2">2</a></sup>. It is a math <i>ξα+x<sub>i<sup>m-n</sup></sub>=y<sup>2+a<sub>0</sub></sup></i></p>
-<p>Some other math: <i>∫<sub>0</sub><sup>1</sup>x dx</i>
-Hello
-<div class="math" style="width:7.2896484375em;height:4.80986328125em;vertical-align:-2.0765625em;">
-<div style="left:0.4em;top:0.4323242187499997em;height:1.7476074218750002em;" class="left-bracket"></div>
-<div style="left:0.65em;top:0.7683105468749999em;">1</div>
-<div style="left:1.17392578125em;top:0.7683105468749999em;">+</div>
-<div style="left:1.9146484375em;top:0.7683105468749999em;" class="italic">e</div>
-<div style="left:3.0897216796874996em;top:0.3841552734374996em;font-size:0.8em;" class="italic">x</div>
-<div style="left:2.96240234375em;top:0.4323242187499997em;height:0.43690185546875004em;" class="right-brace0"></div>
-<div style="left:3.21240234375em;top:0.8692260742187498em;height:0.43690185546875004em;" class="right-brace1"></div>
-<div style="left:3.21240234375em;top:1.3061279296875em;height:0.43690185546875004em;" class="right-brace2"></div>
-<div style="left:2.96240234375em;top:1.7430297851562497em;height:0.43690185546875004em;" class="right-brace3"></div>
-<div style="left:0.3em;top:0.3073242187499997em;width:3.16240234375em;" class="hline"></div>
-<div style="left:0.1em;top:0.3073242187499997em;width:0.2em;height:1.7976074218750002em;" class="sqrt1"></div>
-<div style="left:0.0em;top:1.565888671875em;width:0.1em;height:0.5390429687500002em;" class="sqrt2"></div>
-<div style="left:3.66240234375em;top:0.768310546875em;">+</div>
-<div style="left:5.557324218750001em;top:0.0em;">1</div>
-<div style="left:5.757324218750001em;top:1.7366210937500002em;">1</div>
-<div style="left:5.65732421875em;top:1.7366210937500002em;width:0.7323242187499999em;" class="hline"></div>
-<div style="left:5.45732421875em;top:1.7366210937500002em;width:0.2em;height:1.33662109375em;" class="sqrt1"></div>
-<div style="left:5.3573242187500005em;top:2.71859375em;width:0.1em;height:0.35464843750000014em;" class="sqrt2"></div>
-<div style="left:5.65732421875em;top:3.2732421875em;">2</div>
-<div style="left:5.2323242187500005em;top:3.2732421875em;width:1.4823242187499999em;" class="hline"></div>
-<div style="left:5.00732421875em;top:1.63662109375em;width:1.8323242187500002em;" class="hline"></div>
-<div style="left:4.80732421875em;top:1.63662109375em;width:0.2em;height:2.9732421875000004em;" class="sqrt1"></div>
-<div style="left:4.70732421875em;top:3.60056640625em;width:0.1em;height:1.0092968750000002em;" class="sqrt2"></div>
-<div style="left:4.58232421875em;top:1.53662109375em;width:2.58232421875em;" class="hline"></div>
+<h1>Chapter 1 Title</h1>
+<p>Hello world 中文
+This ends a paragraph</p>
+<p>
+<div class="math" style="width:3.81640625em;height:1.9976074218750002em;vertical-align:-0.6704345703125001em;">
+<div class="italic" style="left:0.0em;top:0.4609863281250002em;">α</div>
+<div style="left:0.66650390625em;top:0.4609863281250002em;">+</div>
+<div style="left:1.46142578125em;top:0.4609863281250002em;">s</div>
+<div style="left:1.89453125em;top:0.4609863281250002em;">i</div>
+<div style="left:2.08740234375em;top:0.4609863281250002em;">n</div>
+<div class="italic" style="left:2.7080078125em;top:0.4609863281250002em;">β</div>
+<div style="left:4.13818359375em;top:0.0em;font-size:0.8em;">2</div>
 </div>
-+=Hello</p>
-<div class="math" style="width:4em;height:6ex;">
-	<div style="left:0;top:1.7ex;">x+</div>
-	<div id="mathchar" style="left:2em;top:0;">a</div>
-    <div class="n" style="left:1.5em;top:3ex">1+</div>
-	<div style="left:2.5em;top:3ex">b</div>
-	<div class="hline" style="left:1.2em;top:3ex;width:2em;">&nbsp;</div>
-</div>
-This is inline: <div class="math math-inline" style="width:4em;height:6ex;vertical-align:-2.25ex;">
-	<div style="left:0;top:1.5ex;">gf</div>
-    <div style="left:0.5em;top:1.5ex;">f+</div>
-	<div id="mathchar" style="left:2em;top:0;">a</div>
-    <div class="n" style="left:1.5em;top:3ex">1+</div>
-	<div style="left:2.5em;top:3ex">b</div>
-	<div class="hline" style="left:1.2em;top:3ex;width:2em;">&nbsp;</div>
-</div>+ math in the line.<br/>
-<p>This is a very long line after the math.
-<img src="image.svg" style="width:10em;height:2em;" />
-This is a very long line after the math.
-ALL:  !"#$%()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſƀƁƂƃƄƅƆƇƈƉƊƋƌƍƎƏƐƑƒƓƔƕƖƗƘƙƚƛƜƝƞƟƠơƢƣƤƥƦƧƨƩƪƫƬƭƮƯưƱƲƳƴƵƶƷƸƹƺƻƼƽƾƿǀǁǂǃǄǅǆǇǈǉǊǋǌǍǎǏǐǑǒǓǔǕǖǗǘǙǚǛǜǝǞǟǠǡǢǣǤǥǦǧǨǩǪǫǬǭǮǯǰǺǻǼǽǾǿȘșȚțɐɑɒɓɔɕɖɗɘəɚɛɜɝɞɟɠɡɢɣɤɥɦɧɨɩɪɫɬɭɮɯɰɱɲɳɴɵɶɷɸɹɺɻɼɽɾɿʀʁʂʃʄʅʆʇʈʉʊʋʌʍʎʏʐʑʒʓʔʕʖʗʘʙʚʛʜʝʞʟʠʡʢʣʤʥʦʧʨʰʱʲʳʴʵʶʷʸʹʺʻʼʽʾʿˀˁ˂˃˄˅ˆˇˈˉˊˋˌˍˎˏːˑ˒˓˔˕˖˗˘˙˚˛˜˝˞ˠˡˢˣˤ˥˦˧˨˩̴̵̶̷̸̡̢̧̨̛̖̗̘̙̜̝̞̟̠̣̤̥̦̩̪̫̬̭̮̯̰̱̲̳̹̺̻̼̀́̂̃̄̅̆̇̈̉̊̋̌̍̎̏̐̑̒̓̔̽̾̿̀́̈́̕̚ͅʹ͵ͺ;΄΅ΆΈΉΊΌΎΏΐΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩΪΫάέήίΰαβγδεζηθικλμνξοπρςστυφχψωϊϋόύώϐϑϒϓϔϕϖϚϜϞϠϮϯϰϱϲЁЂЃЄЅІЇЈЉЊЋЌЎЏАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђѓєѕіїјљњћќўџѢѣѪѫҐґҒғҔҕҖҗҘҙҚқҜҝҞҟҠҡҢңҤҥҦҧҨҩҪҫҬҭҮүҰұҲҳҴҵҶҷҸҹҺһҼҽҾҿӀӁӂӃӄӇӈӋӌְֱֲֳִֵֶַָֹֻּֽ־ֿ׀ׁׂ׃אבגדהוזחטיךכלםמןנסעףפץצקרשתװױײ׳״ẀẁẂẃẄẅỲỳ           ​‌‍‎‏‐‑‒–—―‖‗‘’‚‛“”„‟†‡•‣․‥…‧  ‪‫‬‭‮‰‱′″‴‵‶‷‸‹›※‼‽‾⁀⁁⁂⁃⁄⁰⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁿ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎₠₡₢₣₤₥₦₧₨₩₪€℀℁ℂ℃℄℅℆ℇ℈℉ℊℋℌℍℎℏℐℑℒℓ℔ℕ№℗℘ℙℚℛℜℝ℞℟℠℡™℣ℤ℥Ω℧ℨ℩KÅℬℭ℮ℯℰℱℲℳℴℵℶℷℸ⅛⅜⅝⅞←↑→↓↔↕↖↗↘↙↚↛↜↝↞↟↠↡↢↣↤↥↦↧↨↩↪↫↬↭↮↯↰↱↲↳↴↵↶↷↸↹↺↻↼↽↾↿⇀⇁⇂⇃⇄⇅⇆⇇⇈⇉⇊⇋⇌⇍⇎⇏⇐⇑⇒⇓⇔⇕⇖⇗⇘⇙⇚⇛⇜⇝⇞⇟⇠⇡⇢⇣⇤⇥⇦⇧⇨⇩⇪∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳∴∵∶∷∸∹∺∻∼∽∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟≠≡≢≣≤≥≦≧≨≩≪≫≬≭≮≯≰≱≲≳≴≵≶≷≸≹≺≻≼≽≾≿⊀⊁⊂⊃⊄⊅⊆⊇⊈⊉⊊⊋⊌⊍⊎⊏⊐⊑⊒⊓⊔⊕⊖⊗⊘⊙⊚⊛⊜⊝⊞⊟⊠⊡⊢⊣⊤⊥⊦⊧⊨⊩⊪⊫⊬⊭⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⌂⌆⌈⌉⌊⌋⌠⌡⌢⌣␀␁␂␃␄␅␆␇␈␉␊␋␌␍␎␏␐␑␒␓␔␕␖␗␘␙␚␛␜␝␞␟␠␡␢␣␤─━│┃┄┅┆┇┈┉┊┋┌┍┎┏┐┑┒┓└┕┖┗┘┙┚┛├┝┞┟┠┡┢┣┤┥┦┧┨┩┪┫┬┭┮┯┰┱┲┳┴┵┶┷┸┹┺┻┼┽┾┿╀╁╂╃╄╅╆╇╈╉╊╋╌╍╎╏═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬╭╮╯╰╱╲╳╴╵╶╷╸╹╺╻╼╽╾╿▀▂▃▄▅▆▇█▉▊▋▌▍▎▏▐░▒▓▔▕■□▢▣▤▥▦▧▨▩▪▫▬▭▮▯▰▱▲△▴▵▶▷▸▹►▻▼▽▾▿◀◁◂◃◄◅◆◇◈◉◊○◌◍◎●◐◑◒◓◔◕◖◗◘◙◚◛◜◝◞◟◠◡◢◣◤◥◦◧◨◩◪◫◬◭◮☺☻☼♀♂♠♣♥♦♪♫♭♮♯ﬁﬂﬞ﻿
 </p>
-<footer>
-<p><a id="footnote-1" href="#fnback-1">1.</a> Footnote content 1</p>
-<p><a id="footnote-2" href="#fnback-2">2.</a> Footnote content 2</p>
-</footer>
-</body>
-</html>
+<p>This is inline <div class="math" style="width:9.32060546875em;height:3.9952148437500004em;vertical-align:-1.6692382812500002em;">
+<div class="left-bracket-rounded" style="left:0.0em;top:0.125em;height:2.8232421875em;"></div>
+<div style="left:0.25em;top:0.0em;">1</div>
+<div style="left:1.38232421875em;top:0.0em;">2</div>
+<div style="left:0.25em;top:1.53662109375em;">3</div>
+<div style="left:1.38232421875em;top:1.53662109375em;">4</div>
+<div class="right-bracket-rounded" style="left:2.0146484375em;top:0.125em;height:2.8232421875em;"></div>
+<div style="left:2.2646484375em;top:0.768310546875em;">=</div>
+<div style="left:3.0595703125em;top:0.768310546875em;">s</div>
+<div style="left:3.49267578125em;top:0.768310546875em;">i</div>
+<div style="left:3.685546875em;top:0.768310546875em;">n</div>
+<div class="italic" style="left:4.30615234375em;top:0.768310546875em;">β</div>
+<div style="left:4.8603515625em;top:0.768310546875em;">+</div>
+<div style="left:7.17177734375em;top:0.0em;">1</div>
+<div class="italic" style="left:5.9052734375em;top:1.9976074218750002em;">e</div>
+<div class="italic" style="left:8.0780029296875em;top:1.9207763671875em;font-size:0.8em;">x</div>
+<div class="italic" style="left:8.0780029296875em;top:3.4573974609375em;font-size:0.8em;">n</div>
+<div style="left:6.95888671875em;top:1.9976074218750002em;">+</div>
+<div class="italic" style="left:8.15380859375em;top:1.9976074218750002em;">α</div>
+<div class="hline" style="left:8.05380859375em;top:1.9976074218750002em;width:0.8167968749999999em;"></div>
+<div class="sqrt1" style="left:7.853808593749999em;top:1.9976074218750002em;width:0.2em;height:1.33662109375em;"></div>
+<div class="sqrt2" style="left:7.75380859375em;top:2.979580078125em;width:0.1em;height:0.35464843750000014em;"></div>
+<div class="hline" style="left:5.7802734375em;top:1.53662109375em;width:3.41533203125em;"></div>
+</div> an <div class="math" style="width:1.13232421875em;height:3.0732421875em;vertical-align:-1.208251953125em;">
+<div style="left:0.25em;top:0.0em;">1</div>
+<div style="left:0.25em;top:1.53662109375em;">2</div>
+<div class="hline" style="left:0.125em;top:1.53662109375em;width:0.88232421875em;"></div>
+</div> alpha <div class="math" style="width:0.716796875em;height:1.53662109375em;vertical-align:-0.43994140625em;">
+<div class="italic" style="left:0.0em;top:0.0em;">α</div>
+</div>.</p></body></html>

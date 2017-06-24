@@ -6,7 +6,9 @@ This ends a paragraph
 $\alpha+\sin\beta^2$
 
 This is inline $
-\{
-\alpha
-\}
-$ an alpha.
+\left(\begin{array}{cc}
+1&2\\3&4
+\end{array}\right)=
+\sin\beta+\frac{1}
+{e_n^x+\sqrt{\alpha}}
+$ an $\frac{1}{2}$ alpha $\alpha$.
