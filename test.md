@@ -1,14 +1,11 @@
-# Chapter 1 Title
+# 递归网络中的长短期记忆
 
-Hello world 中文
-This ends a paragraph
+## 递归网络 RNN
 
-$\alpha+\sin\beta^2$
+Recurrent Neural Network 的神经单元工作在离散时间序列中。
+在某个时刻，神经元将与其连接的输入神经元在上一个时刻的输出进行加权求和，经过一个激活函数，产生这一时刻的输出。
 
-This is inline $
-\left(\begin{array}{cc}
-1&2\\3&4
-\end{array}\right)=
-\sin\beta+\frac{1}
-{e_n^x+\sqrt{\alpha}}
-$ an $\frac{1}{2}$ alpha $\alpha$.
+$y^i(t) = f\left(\sum_j w_{ij} y^j(t-1)\right)$
+
+
+

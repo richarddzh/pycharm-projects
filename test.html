@@ -81,47 +81,32 @@
 </style>
 </head>
 <body>
-<h1>Chapter 1 Title</h1>
-<p>Hello world 中文
-This ends a paragraph</p>
+<h1>递归网络中的长短期记忆</h1>
+<h2>递归网络 RNN</h2>
+<p>Recurrent Neural Network 的神经单元工作在离散时间序列中。
+在某个时刻，神经元将与其连接的输入神经元在上一个时刻的输出进行加权求和，经过一个激活函数，产生这一时刻的输出。</p>
 <p>
-<div class="math" style="width:3.81640625em;height:1.9976074218750002em;vertical-align:-0.6704345703125001em;">
-<div class="italic" style="left:0.0em;top:0.4609863281250002em;">α</div>
-<div style="left:0.66650390625em;top:0.4609863281250002em;">+</div>
-<div style="left:1.46142578125em;top:0.4609863281250002em;">s</div>
-<div style="left:1.89453125em;top:0.4609863281250002em;">i</div>
-<div style="left:2.08740234375em;top:0.4609863281250002em;">n</div>
-<div class="italic" style="left:2.7080078125em;top:0.4609863281250002em;">β</div>
-<div style="left:4.13818359375em;top:0.0em;font-size:0.8em;">2</div>
+<div class="math" style="width:8.3869140625em;height:2.4585937500000004em;vertical-align:-0.9009277343750002em;">
+<div class="italic" style="left:0.0em;top:0.4609863281250002em;">y</div>
+<div class="italic" style="left:0.653076171875em;top:0.0em;font-size:0.8em;">i</div>
+<div style="left:0.7537109375em;top:0.4609863281250002em;">(</div>
+<div class="italic" style="left:1.04521484375em;top:0.4609863281250002em;">t</div>
+<div style="left:1.38310546875em;top:0.4609863281250002em;">)</div>
+<div style="left:1.6482421875em;top:0.4609863281250002em;">=</div>
+<div class="italic" style="left:2.4041015625em;top:0.4609863281250002em;">f</div>
+<div class="left-bracket-rounded" style="left:2.77177734375em;top:0.125em;height:2.2085937500000004em;"></div>
+<div style="left:3.02177734375em;top:0.4609863281250002em;">∑</div>
+<div class="italic" style="left:4.7861328125em;top:1.5366210937500002em;font-size:0.8em;">j</div>
+<div class="italic" style="left:4.072265625em;top:0.4609863281250002em;">w</div>
+<div class="italic" style="left:6.053466796875em;top:1.5366210937500002em;font-size:0.8em;">i</div>
+<div class="italic" style="left:6.342529296875em;top:1.5366210937500002em;font-size:0.8em;">j</div>
+<div class="italic" style="left:5.3173828125em;top:0.4609863281250002em;">y</div>
+<div class="italic" style="left:7.2998046875em;top:0.0em;font-size:0.8em;">j</div>
+<div style="left:6.083203125em;top:0.4609863281250002em;">(</div>
+<div class="italic" style="left:6.37470703125em;top:0.4609863281250002em;">t</div>
+<div style="left:6.70966796875em;top:0.4609863281250002em;">-</div>
+<div style="left:7.21552734375em;top:0.4609863281250002em;">1</div>
+<div style="left:7.81171875em;top:0.4609863281250002em;">)</div>
+<div class="right-bracket-rounded" style="left:8.1369140625em;top:0.125em;height:2.2085937500000004em;"></div>
 </div>
-</p>
-<p>This is inline <div class="math" style="width:9.32060546875em;height:3.9952148437500004em;vertical-align:-1.6692382812500002em;">
-<div class="left-bracket-rounded" style="left:0.0em;top:0.125em;height:2.8232421875em;"></div>
-<div style="left:0.25em;top:0.0em;">1</div>
-<div style="left:1.38232421875em;top:0.0em;">2</div>
-<div style="left:0.25em;top:1.53662109375em;">3</div>
-<div style="left:1.38232421875em;top:1.53662109375em;">4</div>
-<div class="right-bracket-rounded" style="left:2.0146484375em;top:0.125em;height:2.8232421875em;"></div>
-<div style="left:2.2646484375em;top:0.768310546875em;">=</div>
-<div style="left:3.0595703125em;top:0.768310546875em;">s</div>
-<div style="left:3.49267578125em;top:0.768310546875em;">i</div>
-<div style="left:3.685546875em;top:0.768310546875em;">n</div>
-<div class="italic" style="left:4.30615234375em;top:0.768310546875em;">β</div>
-<div style="left:4.8603515625em;top:0.768310546875em;">+</div>
-<div style="left:7.17177734375em;top:0.0em;">1</div>
-<div class="italic" style="left:5.9052734375em;top:1.9976074218750002em;">e</div>
-<div class="italic" style="left:8.0780029296875em;top:1.9207763671875em;font-size:0.8em;">x</div>
-<div class="italic" style="left:8.0780029296875em;top:3.4573974609375em;font-size:0.8em;">n</div>
-<div style="left:6.95888671875em;top:1.9976074218750002em;">+</div>
-<div class="italic" style="left:8.15380859375em;top:1.9976074218750002em;">α</div>
-<div class="hline" style="left:8.05380859375em;top:1.9976074218750002em;width:0.8167968749999999em;"></div>
-<div class="sqrt1" style="left:7.853808593749999em;top:1.9976074218750002em;width:0.2em;height:1.33662109375em;"></div>
-<div class="sqrt2" style="left:7.75380859375em;top:2.979580078125em;width:0.1em;height:0.35464843750000014em;"></div>
-<div class="hline" style="left:5.7802734375em;top:1.53662109375em;width:3.41533203125em;"></div>
-</div> an <div class="math" style="width:1.13232421875em;height:3.0732421875em;vertical-align:-1.208251953125em;">
-<div style="left:0.25em;top:0.0em;">1</div>
-<div style="left:0.25em;top:1.53662109375em;">2</div>
-<div class="hline" style="left:0.125em;top:1.53662109375em;width:0.88232421875em;"></div>
-</div> alpha <div class="math" style="width:0.716796875em;height:1.53662109375em;vertical-align:-0.43994140625em;">
-<div class="italic" style="left:0.0em;top:0.0em;">α</div>
-</div>.</p></body></html>
+</p></body></html>
